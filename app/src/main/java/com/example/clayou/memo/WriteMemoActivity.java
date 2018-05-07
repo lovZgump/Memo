@@ -70,6 +70,8 @@ public class WriteMemoActivity extends AppCompatActivity {
             }
         });
 
+        init_bottom();
+
     }
 
     private void release() {
@@ -117,5 +119,42 @@ public class WriteMemoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 底部栏的初始化
+     */
+    private void init_bottom(){
+
+        findViewById(R.id.open_bottom_create).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.bottom_create).setVisibility(View.GONE);
+                findViewById(R.id.editor_bottom).setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+        findViewById(R.id.reBack_bottom_create).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(hide){
+                    //findViewById(R.id.toolbar_layout).setVisibility(View.VISIBLE);
+                }else{
+                    //findViewById(R.id.toolbar_layout).setVisibility(View.GONE);
+                }
+                hide = !hide;
+
+
+            }
+        });
+        findViewById(R.id.location_bottom_create).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
     }
 }
