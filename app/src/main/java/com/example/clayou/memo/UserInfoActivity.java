@@ -253,7 +253,7 @@ public class UserInfoActivity extends AppCompatActivity
                 switch (index){
                     //edit
                     case 0:
-                        //noteManager.editClick(position);
+                        memoManager.editClick(position);
                         break;
                     case 1:
 //                        Intent intent = new Intent(MainActivity.this,FilesActivity.class);

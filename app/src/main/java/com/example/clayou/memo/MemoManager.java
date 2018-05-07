@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class MemoManager {
     private Context mContext;
     private List<Memo> list;
 
-    private String currentFolderName;//Memo的所属文件夹
+    private String currentFolderName = "Memo";//Memo的所属文件夹
     private BaseAdapter adapter; //适配器
     private DBManager dbManager;//数据库管理类
 
@@ -102,6 +103,56 @@ public class MemoManager {
         final Memo note1 = note;
         dbManager.delete("Memo",note1);
 
+    }
+
+    /**
+     * 编辑操作
+     * @param position
+     */
+    public void editClick(int position){
+
+
+        final EditDialog dialog = new EditDialog(mContext);
+        dialog.show();
+
+        final Memo select_item = list.get(position);
+
+        dialog.setTitle("编辑");
+        dialog.setInfo(select_item.getName());
+
+        dialog.setYesListener(new MyOnClickListener() {
+            @Override
+            public void onClick() {
+                String newName = dialog.getInfo();
+
+                if(StringUtil.isEmpty(newName.trim())){
+                    Toast.makeText(mContext, "标题不能为空", Toast.LENGTH_SHORT).show();
+                }else{
+                    update(select_item, newName);
+                }
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 更新名字/level
+     * @param note
+     * @param newName
+     */
+    private void update(Memo note,String newName){
+
+        Memo newNote = note.getClone();
+        newNote.setName(newName);
+
+
+        dbManager.upDate(currentFolderName,note,newNote);
+
+        if(list!=null) {
+            int index = list.indexOf(note);
+            list.set(index, newNote);
+            adapter.notifyDataSetChanged();
+        }
     }
 
 }

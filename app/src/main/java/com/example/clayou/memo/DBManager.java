@@ -217,5 +217,23 @@ public class DBManager {
         return  database.delete(folderName,null,null);
     }
 
+    /**
+     * 更新Note
+     * @param folderName
+     * @param preNote
+     * @param newNote
+     */
+    public void upDate(String folderName,Memo preNote,Memo newNote){
+
+        byte[] pre_data = getData(preNote);
+        byte[] new_data = getData(newNote);
+
+        SQLiteDatabase database = DBHelper.getInstance(mContext).getWritableDatabase();
+
+        database.execSQL("update "+ folderName+ " set item = ? where item = ?",
+                new Object[]{new_data,pre_data});
+
+        database.close();
+    }
 
 }

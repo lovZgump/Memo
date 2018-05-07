@@ -28,7 +28,7 @@ public class Memo extends Item implements Serializable, Comparable {
 
     public Memo getClone(){
 
-        return  new Memo(getName(),getDate(),getMemo());
+        return  new Memo(getName(),getDate(),getFolderName(),getUsername(),getMemo());
 
     }
 
