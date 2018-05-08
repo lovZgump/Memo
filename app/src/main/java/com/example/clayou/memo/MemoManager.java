@@ -38,7 +38,7 @@ public class MemoManager {
 
     public void addDescription() {
 
-        Memo memo = new Memo("第一次使用Memo", new Date(), "相逢是缘，谢谢使用...");
+        Memo memo = new Memo("第一次使用Memo", new Date(), "Memo", "Admin","很好用的啊，作者快疯了...");
         add(memo);
     }
 
@@ -137,22 +137,31 @@ public class MemoManager {
 
     /**
      * 更新名字/level
-     * @param note
+     * @param memo
      * @param newName
      */
-    private void update(Memo note,String newName){
+    private void update(Memo memo,String newName){
 
-        Memo newNote = note.getClone();
+        Memo newNote = memo.getClone();
         newNote.setName(newName);
 
 
-        dbManager.upDate(currentFolderName,note,newNote);
+        dbManager.upDate(currentFolderName,memo,newNote);
 
         if(list!=null) {
-            int index = list.indexOf(note);
+            int index = list.indexOf(memo);
             list.set(index, newNote);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    /**
+     * 数据库更新
+     * @param preMemo
+     * @param newMemo
+     */
+    public void update(Memo preMemo,Memo newMemo){
+        dbManager.upDate(currentFolderName,preMemo,newMemo);
     }
 
 }

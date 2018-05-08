@@ -4,11 +4,6 @@ import android.app.Application;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
-/**
- * Created on 2017/4/25.
- * Application类
- */
-
 public class AndroidApplication extends Application {
 
 

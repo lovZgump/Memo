@@ -307,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
                 intent.putExtra("username", username);
                 startActivity(intent);
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_left);
 
             } else {
                 Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();

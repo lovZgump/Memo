@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 
 /**
- * 存储便签的时间
+ * 存储Memo的时间
  */
 public class Date implements Serializable{
 

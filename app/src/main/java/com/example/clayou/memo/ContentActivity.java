@@ -76,13 +76,13 @@ public class ContentActivity extends AppCompatActivity {
         Random random = new Random();
         int index = random.nextInt(3);
         switch (index) {
-            case 1:
+            case 0:
                 findViewById(R.id.level_content).setBackgroundResource(R.drawable.radius_green);
                 break;
             case 2:
                 findViewById(R.id.level_content).setBackgroundResource(R.drawable.radius_orange);
                 break;
-            case 3:
+            case 1:
                 findViewById(R.id.level_content).setBackgroundResource(R.drawable.radius_red);
                 break;
         }
@@ -95,9 +95,10 @@ public class ContentActivity extends AppCompatActivity {
         findViewById(R.id.edit_bottom_content).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                edit();
             }
         });
+
         //删除
         findViewById(R.id.delete_bottom_content).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,20 +107,37 @@ public class ContentActivity extends AppCompatActivity {
                 finish();
             }
         });
-        //移动到
+
+        //移动
         findViewById(R.id.move_bottom_content).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        //位置
+
+        //定位
         findViewById(R.id.location_bottom_content).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLocation();
             }
         });
+    }
+
+    private  void edit(){
+
+        Intent intent = new Intent(this,CreateNewMemoActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("memo", memo);
+        boolean model = true;
+        bundle.putBoolean("model", model);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        finish();
     }
 
     private void getLocation() {

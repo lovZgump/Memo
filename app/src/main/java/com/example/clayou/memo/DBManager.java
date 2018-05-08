@@ -220,13 +220,13 @@ public class DBManager {
     /**
      * 更新Note
      * @param folderName
-     * @param preNote
-     * @param newNote
+     * @param preMemo
+     * @param newMemo
      */
-    public void upDate(String folderName,Memo preNote,Memo newNote){
+    public void upDate(String folderName,Memo preMemo,Memo newMemo){
 
-        byte[] pre_data = getData(preNote);
-        byte[] new_data = getData(newNote);
+        byte[] pre_data = getData(preMemo);
+        byte[] new_data = getData(newMemo);
 
         SQLiteDatabase database = DBHelper.getInstance(mContext).getWritableDatabase();
 

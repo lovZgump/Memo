@@ -49,6 +49,9 @@
             android:name=".ContentActivity"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name=".CreateNewMemoActivity"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

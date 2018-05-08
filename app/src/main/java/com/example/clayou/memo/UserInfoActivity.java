@@ -180,9 +180,9 @@ public class UserInfoActivity extends AppCompatActivity
     public void exit() {
         if (!isExit) {
             isExit = true;
-            //Toast.makeText(this, "再按一次返回键退出应用", Toast.LENGTH_SHORT).show();
-            Snackbar.make(this.findViewById(R.id.fab), "再按一次返回键退出应用", Snackbar.LENGTH_SHORT)
-                       .setAction("Action", null).show();
+            Toast.makeText(this, "再按一次返回键退出应用", Toast.LENGTH_SHORT).show();
+//            Snackbar.make(this.findViewById(R.id.action_menu), "再按一次返回键退出应用", Snackbar.LENGTH_SHORT)
+//                       .setAction("Action", null).show();
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
             Intent intent = new Intent(Intent.ACTION_MAIN);
