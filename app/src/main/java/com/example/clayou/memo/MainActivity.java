@@ -44,14 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private String username;
     private String password;
 
-    private View mProgressView;
-
-    //private UserLoginTask mAuthTask = null;
-
     private static final int LOGIN = 1;
 
     private Handler handler = new Handler() {
-
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case LOGIN:
@@ -89,16 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
         Bmob.initialize(this, "c234fd8bea5c0e096466625d03a86f2a");
 
-        //this.initApp();
-
-
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         accountEdit = findViewById(R.id.input_account);
         passwordEdit = findViewById(R.id.input_password);
         rememberPass = findViewById(R.id.remember_pass);
-        mProgressView = findViewById(R.id.login_progress);
 
         passwordEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -138,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void done(List<Account> list, BmobException e) {
                                 if (list.isEmpty() || !(list.get(0).getPassword().equals(password))) {
-                                    Log.d("111", "done: "+list.get(0).getUsername());
                                     //Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                                     flag = 0;
                                 } else if (list.get(0).getPassword().equals(password)) {
@@ -156,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
                         handler.sendMessage(message);
                     }
                 }).start();
-                //attemptLogin();
             }
         });
 
@@ -188,8 +177,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void initApp(){
-    }
 
     private void attemptLogin(){
 
@@ -243,83 +230,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            BmobQuery<Account> query = new BmobQuery<Account>();
-            query.addWhereEqualTo("username", username);
-            query.findObjects(new FindListener<Account>() {
-                @Override
-                public void done(List<Account> list, BmobException e) {
-                    if (list.isEmpty() || !(list.get(0).getPassword().equals(password))) {
-                        Log.d("111", "done: "+list.get(0).getUsername());
-                        //Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-                        flag = 0;
-                    } else if (list.get(0).getPassword().equals(password)) {
-                        flag = 1;
-                    }
-                }
-            });
-
-            if (flag == 1)
-                return true;
-            else
-                return false;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            //mAuthTask = null;
-
-            if (success) {
-                Log.d("111", "onPostExecute: i'm here");
-                editor = pref.edit();
-                if (rememberPass.isChecked()) {
-                    editor.putBoolean("remember_password", true);
-                    editor.putString("username", username);
-                    editor.putString("password", password);
-                } else {
-                    editor.putBoolean("remember_password", true);
-                    editor.putString("username", username);
-                    editor.putString("password", "");
-                }
-                editor.apply();
-
-                Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
-                intent.putExtra("username", username);
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_left);
-
-            } else {
-                Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-                passwordEdit.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            //mAuthTask = null;
-        }
-    }
+//    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+//
+//        private final String mEmail;
+//        private final String mPassword;
+//
+//        UserLoginTask(String email, String password) {
+//            mEmail = email;
+//            mPassword = password;
+//        }
+//
+//        @Override
+//        protected Boolean doInBackground(Void... params) {
+//            // TODO: attempt authentication against a network service.
+//
+//            BmobQuery<Account> query = new BmobQuery<Account>();
+//            query.addWhereEqualTo("username", username);
+//            query.findObjects(new FindListener<Account>() {
+//                @Override
+//                public void done(List<Account> list, BmobException e) {
+//                    if (list.isEmpty() || !(list.get(0).getPassword().equals(password))) {
+//                        Log.d("111", "done: "+list.get(0).getUsername());
+//                        //Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+//                        flag = 0;
+//                    } else if (list.get(0).getPassword().equals(password)) {
+//                        flag = 1;
+//                    }
+//                }
+//            });
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            return true;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final Boolean success) {
+//            //mAuthTask = null;
+//
+//            if(flag == 1){
+//                Log.d("111", "onPostExecute: i'm here");
+//                editor = pref.edit();
+//                if (rememberPass.isChecked()) {
+//                    editor.putBoolean("remember_password", true);
+//                    editor.putString("username", username);
+//                    editor.putString("password", password);
+//                } else {
+//                    editor.putBoolean("remember_password", true);
+//                    editor.putString("username", username);
+//                    editor.putString("password", "");
+//                }
+//                editor.apply();
+//
+//                Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+//                intent.putExtra("username", username);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_left);
+//
+//            } else {
+//                Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+//                passwordEdit.requestFocus();
+//            }
+//        }
+//
+//        @Override
+//        protected void onCancelled() {
+//            //mAuthTask = null;
+//        }
+//    }
 
 }
 

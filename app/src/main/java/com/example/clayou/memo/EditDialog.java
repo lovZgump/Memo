@@ -19,25 +19,16 @@ public class EditDialog extends android.app.Dialog implements View.OnClickListen
     private Button yes;
     private Button no;
     private Context mContext;
-    private int level;
 
 
-    private MyOnClickListener noListener;//取消按钮被点击了的监听器
-    private MyOnClickListener yesListener;//确定按钮被点击了的监听器
+    private MyOnClickListener noListener;
+    private MyOnClickListener yesListener;
 
-    /**
-     *
-     * @param context
-     */
     public EditDialog(Context context) {
         super(context, R.style.MyDialog);
         mContext=context;
     }
 
-    /**
-     * 初始化
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +53,8 @@ public class EditDialog extends android.app.Dialog implements View.OnClickListen
     }
 
 
-    /**
-     * 注册监听事件
-     */
     protected  void initEvent() {
-        //确定按钮被点击后，向外界提供监听
+
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,42 +63,29 @@ public class EditDialog extends android.app.Dialog implements View.OnClickListen
                 }
             }
         });
-        //取消按钮被点击后，向外界提供监听
+
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (noListener != null) {
                   noListener.onClick();
                 }else{
-                    dismiss();//若没有新设置事件,则默认关闭Dialog
+                    dismiss();
                 }
             }
         });
 
     }
 
-
-    /**
-     *
-     * @param listener
-     */
     public void setYesListener (MyOnClickListener listener){
         this.yesListener = listener;
     }
 
-    /**
-     *
-     * @param listener
-     */
+
     public void setNoListener (MyOnClickListener listener){
         this.noListener = listener;
     }
 
-
-    /**
-     *
-     * @return
-     */
     public String getInfo() {
 
         return info.getText().toString();
@@ -130,11 +105,6 @@ public class EditDialog extends android.app.Dialog implements View.OnClickListen
         }
     }
 
-
-    /**
-     * 监听事件
-     * @param v
-     */
     @Override
     public void onClick(View v) {
 
@@ -142,21 +112,8 @@ public class EditDialog extends android.app.Dialog implements View.OnClickListen
             case R.id.btn_red:
             case R.id.btn_green:
             case R.id.btn_orange:
-                change_level(v);
                 break;
         }
     }
 
-    /**
-     * 改变level
-     * @param v
-     */
-
-    private void change_level(View v) {
-
-    }
-
-    public int getLevel() {
-        return level;
-    }
 }

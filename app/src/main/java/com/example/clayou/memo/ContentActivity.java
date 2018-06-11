@@ -13,10 +13,6 @@ import java.util.TimerTask;
 
 import jp.wasabeef.richeditor.RichEditor;
 
-/**
- * Created by 10295 on 2018/5/7.
- */
-
 public class ContentActivity extends AppCompatActivity {
 
     private Memo memo;
@@ -141,7 +137,7 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     private void getLocation() {
-        //正在获取定位....
+
         final ProDialog proDialog = new ProDialog(this,
                 getResources().getString(R.string.location));
 

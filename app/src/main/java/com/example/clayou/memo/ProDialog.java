@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-/**
- * 进度框
- */
-
 public class ProDialog extends ProgressDialog{
 
     private String text;

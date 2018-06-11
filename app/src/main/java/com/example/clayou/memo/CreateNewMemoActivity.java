@@ -37,7 +37,7 @@ public class CreateNewMemoActivity extends AppCompatActivity implements View.OnC
     private String username;
 
     //模式
-    private boolean model; // (false 新建模式   true 编辑模式)
+    private boolean model = false; // (false 新建模式   true 编辑模式)
 
     //编辑的Note
     private Memo edit_Memo;
@@ -57,6 +57,8 @@ public class CreateNewMemoActivity extends AppCompatActivity implements View.OnC
         TextView  model_title = (TextView) findViewById(R.id.title_toolbar);
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
+
+        username = intent.getStringExtra("username");
 
         model = bundle.getBoolean("model");
         if (model) {
@@ -279,19 +281,18 @@ public class CreateNewMemoActivity extends AppCompatActivity implements View.OnC
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
 
+                    String titleName = title.getText().toString();
+                    if(StringUtil.isEmpty(titleName)){
+                        titleName="未命名";
+                    }
+                    Memo create_note = new Memo(titleName, date,
+                            "Memo", username,
+                            mEditor.getHtml());
 
-//                    String titleName = title.getText().toString();
-//                    if(StringUtil.isEmpty(titleName)){
-//                        titleName="未命名";
-//                    }
-//                    Note create_note = new Note(titleName, date,
-//                            location.getText().toString(), mEditor.getHtml(),
-//                            currentFolderName, level);
-//
-//                    NoteManager noteManager = new NoteManager(CreateActivity.this, currentFolderName);
-//                    noteManager.add(create_note);
-//                    hideOrOpenKeyBoard();
-//                    finish();
+                    MemoManager noteManager = new MemoManager(CreateNewMemoActivity.this, currentFolderName);
+                    noteManager.add(create_note);
+                    hideOrOpenKeyBoard();
+                    finish();
 
                     return false;
                 }

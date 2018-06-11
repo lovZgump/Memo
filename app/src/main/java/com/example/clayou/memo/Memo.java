@@ -2,10 +2,6 @@ package com.example.clayou.memo;
 
 import java.io.Serializable;
 
-/**
- * Created by 10295 on 2018/5/7.
- */
-
 public class Memo extends Item implements Serializable, Comparable {
 
     private String username;

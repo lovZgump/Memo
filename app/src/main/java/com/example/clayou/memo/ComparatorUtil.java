@@ -3,10 +3,7 @@ package com.example.clayou.memo;
 
 import java.util.Comparator;
 
-/**
- * 比较工具类
- * 排序
- */
+
 public class ComparatorUtil implements Comparator<Memo> {
 
     @Override

@@ -121,9 +121,6 @@ public class WriteMemoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * 底部栏的初始化
-     */
     private void init_bottom(){
 
         findViewById(R.id.open_bottom_create).setOnClickListener(new View.OnClickListener() {

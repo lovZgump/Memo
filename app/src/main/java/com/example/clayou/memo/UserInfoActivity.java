@@ -256,16 +256,6 @@ public class UserInfoActivity extends AppCompatActivity
                         memoManager.editClick(position);
                         break;
                     case 1:
-//                        Intent intent = new Intent(MainActivity.this,FilesActivity.class);
-//                        intent.putExtra("move",true);
-//
-//                        Bundle bundle = new Bundle();
-//                        bundle.putSerializable("note",mData.get(position));
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//
-//                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-//                        //move
                         break;
                     case 2:
                         memoManager.deleteClick(position);
@@ -279,14 +269,10 @@ public class UserInfoActivity extends AppCompatActivity
     }
 
     public void emptyListCheck(){
-
-
-
         int number = 0;
         if(mData!=null){
             number=mData.size();
         }
-
         if(number == 0) {
             //hide and show
             mListView.setVisibility(View.GONE);
@@ -311,6 +297,15 @@ public class UserInfoActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
+                FloatingActionsMenu menu = (FloatingActionsMenu)findViewById(R.id.action_menu);
+                menu.collapse();
+
+                Intent intent = new Intent(UserInfoActivity.this,CreateNewMemoActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+                findViewById(R.id.action_menu).bringToFront();
             }
         });
 
@@ -319,8 +314,7 @@ public class UserInfoActivity extends AppCompatActivity
         fab_quick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //noteManager.add();
-                //关闭fab菜单
+
                 FloatingActionsMenu menu = (FloatingActionsMenu)findViewById(R.id.action_menu);
                 menu.collapse();
 
