@@ -6,6 +6,7 @@ import cn.bmob.v3.BmobObject;
  * Created by 10295 on 2018/4/11.
  */
 
+//用户类
 public class Account extends BmobObject {
 
     private String username;
